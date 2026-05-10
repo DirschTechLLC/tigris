@@ -1,0 +1,24 @@
+{
+  "name": "tigris",
+  "version": "0.0.1",
+  "description": "A form backend for websites built by Dirsch Tech LLC",
+  "homepage": "https://github.com/dirschn/tigris#readme",
+  "bugs": {
+    "url": "https://github.com/dirschn/tigris/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dirschn/tigris.git"
+  },
+  "license": "AGPL-3.0-or-later",
+  "author": "Dirsch Tech LLC",
+  "type": "commonjs",
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
+    "build:css": "npx @tailwindcss/cli -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "tailwindcss": "^4.3.0"
+  }
+}
