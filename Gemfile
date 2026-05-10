@@ -45,6 +45,7 @@ gem "image_processing", "~> 1.2"
 
 gem "rack-attack", "~> 6.8"
 gem "pagy", "~> 43.5.3"
+gem "friendly_id", "~> 5.5"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
