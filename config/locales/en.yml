@@ -1,31 +1,138 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        submission:
+          attributes:
+            payload:
+              missing_email: "must include an email field"
+
+  sessions:
+    rate_limited: "Too many attempts. Try again later."
+    create:
+      invalid_credentials: "Invalid email or password."
+    new:
+      title: "Sign in"
+      email: "Email address"
+      password: "Password"
+      submit: "Sign in"
+      forgot: "Forgot your password?"
+
+  passwords:
+    rate_limited: "Too many attempts. Try again later."
+    invalid_token: "Password reset link is invalid or has expired."
+    create:
+      sent: "If an account exists for that email, you'll receive reset instructions shortly."
+    update:
+      success: "Password has been reset. Please sign in."
+      mismatch: "Passwords did not match."
+    new:
+      title: "Reset your password"
+      email: "Email address"
+      submit: "Send reset link"
+      back: "Back to sign in"
+    edit:
+      title: "Set new password"
+      password: "New password"
+      confirmation: "Confirm new password"
+      submit: "Update password"
+
+  dashboard:
+    show:
+      title: "Your organizations"
+      open: "Open"
+
+  organizations:
+    require_owner: "You must be an owner to do that."
+    new:
+      title: "Create an organization"
+      name: "Organization name"
+      submit: "Create organization"
+    edit:
+      title: "Organization settings"
+      name: "Organization name"
+      submit: "Save changes"
+    show:
+      slug_label: "Slug"
+      edit: "Edit settings"
+    create:
+      success: "Organization created."
+    update:
+      success: "Organization updated."
+
+  memberships:
+    index:
+      title: "Members"
+      name_col: "Name"
+      email_col: "Email"
+      role_col: "Role"
+      role_owner: "Owner"
+      role_member: "Member"
+      remove: "Remove"
+      confirm_remove: "Remove this member?"
+      add_title: "Add a member"
+      email_placeholder: "Email address"
+      add_submit: "Add"
+    create:
+      success: "%{email} added as a member."
+      not_found: "No account found with that email address."
+      already_member: "That user is already a member."
+    destroy:
+      success: "Member removed."
+      last_owner: "Cannot remove the only owner."
+
+  api_keys:
+    index:
+      title: "API Keys"
+      name_col: "Name"
+      prefix_col: "Prefix"
+      last_used_col: "Last used"
+      status_col: "Status"
+      active: "Active"
+      revoked: "Revoked"
+      never: "Never"
+      revoke: "Revoke"
+      confirm_revoke: "Revoke this API key? This cannot be undone."
+      none: "No API keys yet."
+      new_title: "Create a new key"
+      name_placeholder: "Key name (e.g. Production)"
+      create_submit: "Create"
+    create:
+      success: "Key created. Copy it now — it won't be shown again: %{token}"
+      name_blank: "Name is required."
+    destroy:
+      success: "API key revoked."
+
+  submissions:
+    index:
+      title: "Submissions"
+      email_col: "Email"
+      referrer_col: "Source"
+      received_col: "Received"
+      view: "View"
+      none: "No submissions yet."
+    show:
+      title: "Submission from %{email}"
+      payload_title: "Form data"
+      meta_title: "Metadata"
+      referrer: "Source"
+      ip: "IP address"
+      received: "Received"
+      back: "Back to submissions"
+
+  nav:
+    submissions: "Submissions"
+    api_keys: "API Keys"
+    members: "Members"
+    settings: "Settings"
+    sign_out: "Sign out"
+
+  submissions_mailer:
+    notify:
+      subject: "New submission for %{organization}"
+      greeting: "Hi %{name},"
+      intro: "%{submitter} submitted a contact form on %{organization}."
+      intro_anonymous: "Someone submitted a contact form on %{organization}."
+      referrer: "Source"
+      referrer_unknown: "Unknown"
+      received_at: "Received %{time}"
