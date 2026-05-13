@@ -1,0 +1,11 @@
+%h1.page-title= Current.organization.name
+
+.card.max-w-md
+  %dl.space-y-3
+    %div
+      %dt.text-xs.font-medium.text-muted-foreground= t(".slug_label")
+      %dd.text-sm.text-foreground.font-mono= Current.organization.slug
+
+  - if Current.organization.owner?(Current.user)
+    .mt-6.pt-4.border-t.border-border
+      = link_to t(".edit"), edit_organization_path(Current.organization), class: "btn-secondary"

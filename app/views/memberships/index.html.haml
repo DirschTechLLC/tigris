@@ -1,0 +1,27 @@
+%h1.page-title= t(".title")
+
+.card.mb-6
+  %table.data-table
+    %thead
+      %tr
+        %th= t(".name_col")
+        %th= t(".email_col")
+        %th= t(".role_col")
+        %th
+
+    %tbody
+      - @memberships.each do |membership|
+        %tr
+          %td= membership.user.name
+          %td= membership.user.email_address
+          %td= t(".role_#{membership.role}")
+          %td.text-right
+            - if Current.organization.owner?(Current.user) && !(membership.user == Current.user && membership.owner?)
+              = button_to t(".remove"), organization_membership_path(Current.organization, membership), method: :delete, class: "btn-destructive text-xs py-1 px-2", data: { turbo_confirm: t(".confirm_remove") }
+
+- if Current.organization.owner?(Current.user)
+  .card.max-w-md
+    %h2.text-sm.font-medium.text-foreground.mb-4= t(".add_title")
+    = form_with url: organization_memberships_path(Current.organization), method: :post, class: "flex gap-2" do |f|
+      = f.email_field :email_address, placeholder: t(".email_placeholder"), required: true, class: "field-input flex-1"
+      = f.submit t(".add_submit"), class: "btn-primary shrink-0"

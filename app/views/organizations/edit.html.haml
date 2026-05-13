@@ -1,0 +1,11 @@
+%h1.page-title= t(".title")
+
+.card.max-w-md
+  = form_with model: Current.organization, url: organization_path(Current.organization), method: :patch, class: "space-y-4" do |f|
+    .space-y-1
+      = f.label :name, t(".name"), class: "field-label"
+      = f.text_field :name, required: true, class: "field-input"
+      - Current.organization.errors[:name].each do |msg|
+        %p.text-destructive.text-xs.mt-1= msg
+
+    = f.submit t(".submit"), class: "btn-primary"

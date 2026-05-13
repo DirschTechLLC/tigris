@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title= content_for(:title) || "Tigris"
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = yield :head
+    %link{:href => "/icon.png", :rel => "icon", :type => "image/png"}/
+    %link{:href => "/icon.svg", :rel => "icon", :type => "image/svg+xml"}/
+    = stylesheet_link_tag :app, "data-turbo-track": "reload"
+  %body.bg-background.text-foreground.min-h-screen.flex.items-center.justify-center
+    .w-full.max-w-sm.px-4
+      .text-center.mb-8
+        %h1.text-2xl.font-bold Tigris
+      - if flash[:notice]
+        .bg-primary.text-primary-foreground.rounded-lg.px-4.py-3.text-sm.mb-4= flash[:notice]
+      - if flash[:alert]
+        .bg-destructive.text-destructive-foreground.rounded-lg.px-4.py-3.text-sm.mb-4= flash[:alert]
+      = yield

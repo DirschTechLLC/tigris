@@ -1,0 +1,13 @@
+= form_with url: session_path, class: "space-y-4" do |f|
+  .space-y-1
+    = f.label :email_address, t(".email"), class: "field-label"
+    = f.email_field :email_address, required: true, autofocus: true, autocomplete: "email", class: "field-input"
+
+  .space-y-1
+    = f.label :password, t(".password"), class: "field-label"
+    = f.password_field :password, required: true, autocomplete: "current-password", class: "field-input"
+
+  = f.submit t(".submit"), class: "btn-primary w-full"
+
+.mt-4.text-center
+  = link_to t(".forgot"), new_password_path, class: "text-sm text-muted-foreground hover:text-foreground"

@@ -1,0 +1,35 @@
+%h1.page-title= t(".title")
+
+.card.mb-6
+  - if @api_keys.any?
+    %table.data-table
+      %thead
+        %tr
+          %th= t(".name_col")
+          %th= t(".prefix_col")
+          %th= t(".last_used_col")
+          %th= t(".status_col")
+          %th
+
+      %tbody
+        - @api_keys.each do |key|
+          %tr
+            %td= key.name
+            %td.font-mono.text-xs= key.prefix
+            %td= key.last_used_at ? l(key.last_used_at, format: :short) : t(".never")
+            %td
+              - if key.active?
+                %span.text-xs.font-medium.text-primary= t(".active")
+              - else
+                %span.text-xs.font-medium.text-muted-foreground= t(".revoked")
+            %td.text-right
+              - if key.active?
+                = button_to t(".revoke"), organization_api_key_path(Current.organization, key), method: :delete, class: "btn-destructive text-xs py-1 px-2", data: { turbo_confirm: t(".confirm_revoke") }
+  - else
+    %p.text-sm.text-muted-foreground= t(".none")
+
+.card.max-w-md
+  %h2.text-sm.font-medium.text-foreground.mb-4= t(".new_title")
+  = form_with url: organization_api_keys_path(Current.organization), method: :post, class: "flex gap-2" do |f|
+    = f.text_field :api_key, name: "api_key[name]", placeholder: t(".name_placeholder"), required: true, class: "field-input flex-1"
+    = f.submit t(".create_submit"), class: "btn-primary shrink-0"

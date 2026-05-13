@@ -14,5 +14,16 @@
     %link{:href => "/icon.svg", :rel => "icon", :type => "image/svg+xml"}/
     %link{:href => "/icon.png", :rel => "apple-touch-icon"}/
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
-  %body
-    = yield
+  %body.bg-background.text-foreground.min-h-screen
+    - if authenticated?
+      .flex.min-h-screen
+        = render "shared/sidebar"
+        %main.flex-1.overflow-y-auto
+          - if flash[:notice]
+            .bg-primary.text-primary-foreground.px-4.py-3.text-sm= flash[:notice]
+          - if flash[:alert]
+            .bg-destructive.text-destructive-foreground.px-4.py-3.text-sm= flash[:alert]
+          .px-8.py-6
+            = yield
+    - else
+      = yield

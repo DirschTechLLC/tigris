@@ -1,1 +1,94 @@
 @import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+}
+
+:root {
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.15 0.01 255);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.01 255);
+  --muted: oklch(0.94 0.005 255);
+  --muted-foreground: oklch(0.48 0.02 255);
+  --border: oklch(0.88 0.005 255);
+  --primary: oklch(0.52 0.2 255);
+  --primary-foreground: oklch(1 0 0);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: oklch(0.13 0.01 255);
+    --foreground: oklch(0.93 0.005 255);
+    --card: oklch(0.18 0.01 255);
+    --card-foreground: oklch(0.93 0.005 255);
+    --muted: oklch(0.22 0.01 255);
+    --muted-foreground: oklch(0.62 0.02 255);
+    --border: oklch(0.28 0.01 255);
+    --primary: oklch(0.62 0.2 255);
+    --primary-foreground: oklch(0.1 0 0);
+    --destructive: oklch(0.62 0.22 25);
+    --destructive-foreground: oklch(1 0 0);
+  }
+}
+
+/* Form components */
+.field-input {
+  @apply w-full rounded-md border border-border bg-card px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary;
+}
+
+.field-label {
+  @apply block text-sm font-medium text-foreground mb-1;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 cursor-pointer;
+}
+
+.btn-secondary {
+  @apply rounded-md border border-border bg-card text-foreground px-4 py-2 text-sm font-medium hover:bg-muted cursor-pointer;
+}
+
+.btn-destructive {
+  @apply rounded-md bg-destructive text-destructive-foreground px-4 py-2 text-sm font-medium hover:opacity-90 cursor-pointer;
+}
+
+/* Card */
+.card {
+  @apply bg-card border border-border rounded-lg p-6;
+}
+
+/* Page heading */
+.page-title {
+  @apply text-xl font-semibold text-foreground mb-6;
+}
+
+/* Table */
+.data-table {
+  @apply w-full text-sm;
+}
+
+.data-table th {
+  @apply text-left text-xs font-medium text-muted-foreground uppercase tracking-wide py-3 px-4 border-b border-border;
+}
+
+.data-table td {
+  @apply py-3 px-4 border-b border-border text-foreground;
+}
+
+.data-table tr:last-child td {
+  @apply border-b-0;
+}

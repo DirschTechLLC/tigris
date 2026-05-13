@@ -1,0 +1,14 @@
+= t(".greeting", name: @user.name)
+
+- submitter = @submission.payload["name"].presence
+- if submitter
+  = t(".intro", submitter: submitter, organization: @organization.name)
+- else
+  = t(".intro_anonymous", organization: @organization.name)
+
+- @submission.payload.each do |key, value|
+  = "#{key.to_s.humanize}: #{value}"
+
+= "#{t('.referrer')}: #{@submission.referrer.presence || t('.referrer_unknown')}"
+
+= t(".received_at", time: l(@submission.created_at, format: :long))

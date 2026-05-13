@@ -1,0 +1,8 @@
+%h1.page-title= t(".title")
+
+.grid.gap-4
+  - @organizations.each do |org|
+    .card
+      .flex.items-center.justify-between
+        %h2.font-medium.text-foreground= org.name
+        = link_to t(".open"), organization_submissions_path(org), class: "btn-secondary"

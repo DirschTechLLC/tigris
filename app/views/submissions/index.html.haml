@@ -1,0 +1,26 @@
+%h1.page-title= t(".title")
+
+- if @submissions.any?
+  .card
+    %table.data-table
+      %thead
+        %tr
+          %th= t(".email_col")
+          %th= t(".referrer_col")
+          %th= t(".received_col")
+          %th
+
+      %tbody
+        - @submissions.each do |submission|
+          %tr
+            %td= submission.payload["email"]
+            %td.text-muted-foreground.text-xs.max-w-xs.truncate= submission.referrer.presence || "—"
+            %td.text-muted-foreground.text-xs= l(submission.created_at, format: :short)
+            %td.text-right
+              = link_to t(".view"), organization_submission_path(Current.organization, submission), class: "text-primary text-sm hover:underline"
+
+  .mt-4
+    = render "pagy/nav", pagy: @pagy
+- else
+  .card
+    %p.text-sm.text-muted-foreground= t(".none")

@@ -1,0 +1,25 @@
+%h1.page-title= t(".title", email: @submission.payload["email"])
+
+.grid.gap-6.max-w-2xl
+  .card
+    %h2.text-sm.font-medium.text-foreground.mb-4= t(".payload_title")
+    %dl.space-y-3
+      - @submission.payload.each do |key, value|
+        %div
+          %dt.text-xs.font-medium.text-muted-foreground= key.to_s.humanize
+          %dd.text-sm.text-foreground= value
+
+  .card
+    %h2.text-sm.font-medium.text-foreground.mb-4= t(".meta_title")
+    %dl.space-y-3
+      %div
+        %dt.text-xs.font-medium.text-muted-foreground= t(".referrer")
+        %dd.text-sm.text-foreground= @submission.referrer.presence || "—"
+      %div
+        %dt.text-xs.font-medium.text-muted-foreground= t(".ip")
+        %dd.text-sm.text-foreground.font-mono= @submission.remote_ip
+      %div
+        %dt.text-xs.font-medium.text-muted-foreground= t(".received")
+        %dd.text-sm.text-foreground= l(@submission.created_at, format: :long)
+
+= link_to t(".back"), organization_submissions_path(Current.organization), class: "text-sm text-muted-foreground hover:text-foreground"
