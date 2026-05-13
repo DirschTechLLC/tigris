@@ -1,5 +1,6 @@
 class ApiKey < ApplicationRecord
   belongs_to :organization
+  has_many :submissions, dependent: :destroy
 
   validates :name, presence: true
   validates :token_digest, presence: true, uniqueness: true
@@ -27,7 +28,7 @@ class ApiKey < ApplicationRecord
       prefix: prefix,
       token_digest: Digest::SHA256.hexdigest(raw)
     )
-    [ key, raw ]
+    [key, raw]
   end
 
   def revoke!
